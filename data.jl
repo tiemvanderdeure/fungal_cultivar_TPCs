@@ -21,3 +21,12 @@ col_id_species_id = Vector(sort(unique(dlong[!, [:colony_id, :species_id]]), :co
 species = [dlong[findfirst(dlong.species_id .== i), :species] for i in 1:6]
 temperatures_K = sort(unique(dlong.T_K))
 
+# Prepare data
+ds = map(1:6) do sp_id
+    d = filter(x -> x.species_id == sp_id, dlong)
+    d.colony_id = StatsBase.denserank(d.colony_id)
+    d.id = StatsBase.denserank(d.id)
+    return d
+end
+
+metads = map(d -> d[d.time .== 0, [:id, :temperature_id, :colony_id, :T_K, :temperature]], ds)
