@@ -4,9 +4,9 @@ This repository contains code for the publication "The evolution of thermal perf
 In this paper, we analyze the performance of fungus symbionts cultivated by six fungus-farming ants across a temperature gradient.
 
 ## Corresponding author information
-Name: Jonathan Shik
-Institution: University of Copenhagen
-Address: Universitetsparken 15, 2100 Copenhagen
+Name: Jonathan Shik \
+Institution: University of Copenhagen \
+Address: Universitetsparken 15, 2100 Copenhagen \
 Email: jonathan.shik@bio.ku.dk
 
 
