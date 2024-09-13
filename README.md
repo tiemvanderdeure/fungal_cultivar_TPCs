@@ -1,5 +1,5 @@
-# Code repo for "The evolution of thermal performance curves in fungi farmed by attine ant mutualists"
-This repository contains code for the publication "The evolution of thermal performance curves in fungi farmed by attine ant mutualists" by Oscar Hess, Tiem van der Deure, Mille Bolander, Caio Leal Dutra, and Jonathan Z. Shik. 
+# Code repo for "The evolution of thermal performance curves in fungi farmed by attine ant mutualists in aboveground or belowground microclimates"
+This repository contains code for the publication "The evolution of thermal performance curves in fungi farmed by attine ant mutualists in aboveground or belowground microclimates" by Oscar Hess, Tiem van der Deure, Mille Bolander, Caio Leal Dutra, and Jonathan Z. Shik. 
 
 In this paper, we analyze the performance of fungus symbionts cultivated by six fungus-farming ants across a temperature gradient.
 
