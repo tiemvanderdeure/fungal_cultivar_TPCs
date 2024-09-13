@@ -11,7 +11,7 @@ Email: jonathan.shik@bio.ku.dk
 
 
 ## Usage notes: 
-These datasets were generated in at the University of Copenhagen based on colonies attine ant colonies (Atta colombica, Acromyrmex echinatior, Paratrachymyrmex cornetzi, Cyphomyrmex costatus, Mycocepurus smithii, Apterostigma dentigerum) collected at the Smithsonian Tropical Research Institute in Panama (Soberenia Park).
+These datasets were generated at the University of Copenhagen based on attine ant colonies (Atta colombica, Acromyrmex echinatior, Paratrachymyrmex cornetzi, Cyphomyrmex costatus, Mycocepurus smithii, Apterostigma dentigerum) collected at the Smithsonian Tropical Research Institute in Panama (Soberenia Park).
 
 ## Description of data and code
 This archive contains all data and code to reproduce all statistical analyses and produce raw versions of the figures, as described in the Methods and reported in the Results of the associated paper.
@@ -30,10 +30,10 @@ This file contains results of the laboratory in vitro experiment with fungi grow
   * species: The attine ant species from which the fungus was isolated 
   * colony:  Colony IDs representing individual colonies (biological replicates) from which the fungal sample was isolated 
   * temperature: the temperature treatment (degrees C) at which the Petri dish was incubated (10, 15, 20, 25, 30)
-  * area_d0: the area of the fungus (cm^2) measured on Day 
+  * area_d0: the area of the fungus (cm^2) measured on Day 0
   * area_d7: the area of the fungus (cm^2) measured on Day 7
   * area_d14: the area of the fungus (cm^2) measured on Day 14
-  * area_d21: the area of the fungus (cm^2) measured on Day 7
+  * area_d21: the area of the fungus (cm^2) measured on Day 21
   * area_d28: the area of the fungus (cm^2) measured on Day 28
 
 ### metadata.csv: 
@@ -47,11 +47,11 @@ This file contains metadata for data.csv.
 
 ### alignment.fasta: 
 Aligned ITS sequences for the barcoding analyses and the tree in Figure 1 of the publication
-* Number of colonies seqenced: 20
+* Number of colonies sequenced: 20
 
 ### sequences.fasta: 
 Raw ITS sequences for the barcoding analyses and the tree in Figure 1 of the publication
-* Number of colonies seqenced: 20
+* Number of colonies sequenced: 20
 
 ## Reproducibility
 ### Phylogenetic trees
@@ -62,8 +62,8 @@ After installing the packages, run the script `phylotree.sh` in the shell to gen
 ### Data analysis
 All data analysis was done in Julia v.1.10. We recommend using [juliaup](https://github.com/JuliaLang/juliaup) to install this version of Julia.
 
-After installing Julia and cloning this repository, start Julia in the directory that contains this code. To replicate the environment that were used to run the analysis, type `]` to enter pkg mode, then `activate .` to activate the local environment, and then  `instantiate` to download the packages specified in `Manifest.toml`.
+After installing Julia and cloning this repository, start Julia in the directory that contains this code. To replicate the environment that was used to run the analysis, type `]` to enter pkg mode, then `activate .` to activate the local environment, and then  `instantiate` to download the packages specified in `Manifest.toml`.
 
 The julia script `01_sampling.jl` generates and saves the posterior distributions. The figures and tables in the paper are generated in the script `02_sampling.jl`. These scripts load data from `data.csv` and `metadata.csv`, as well as helper functions and additional code in `data.jl`, `bayesian_model.jl`, and `response_functions`.
 
-Note that the sampling script makes heavy use of multi-threading to speed up computations. It is highly recommended to start julia with mutiple threads. See the official [manual](https://docs.julialang.org/en/v1/manual/multi-threading/) for how to do this.
+Note that the sampling script makes heavy use of multi-threading to speed up computations. It is highly recommended to start julia with multiple threads. See the official [manual](https://docs.julialang.org/en/v1/manual/multi-threading/) for how to do this.
