@@ -38,9 +38,9 @@ This file contains results of the laboratory in vitro experiment with fungi grow
 
 ### metadata.csv: 
 This file contains metadata for data.csv.
- * Number of variables: 4
- * Number of cases/rows: 19
- * Variable List:
+* Number of variables: 4
+* Number of cases/rows: 19
+* Variable List:
   * species: The attine ant species from which the fungus was isolated 
   * colony:  Colony IDs representing individual colonies (biological replicates) from which the fungal sample was isolated 
   * Ecology: Whether the fungus is farmed aboveground or belowground (Categorical variable)
