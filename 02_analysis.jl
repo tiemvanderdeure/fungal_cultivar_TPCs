@@ -237,7 +237,7 @@ include("plot_functions.jl")
 
 species_order = [3,1,6,5,4,2]
 
-map(models, chains_converged, gqs, fs) do model, chns, gq, f
+figs = map(models, chains_converged, gqs, fs) do model, chns, gq, f
     # Figure, axes, and title
     fig = Figure(size  = (700, 700))
     figure_axes = [
@@ -258,7 +258,10 @@ map(models, chains_converged, gqs, fs) do model, chns, gq, f
     end
 
     save("plots/$(model.shortname).pdf", fig; px_per_unit = 3)
+    return fig
 end
+
+save("plots/figure_03.pdf", figs[4])
 
 ### Figure with mean estimates for A. dentigerum for all models
 ts_c = 0.0:0.1:50.0
@@ -285,7 +288,7 @@ end
 scatter!(ax, metads[s_id][:, :temperature], mean_rate_indiv, color = :black)
 fig
 
-save("plots/all_models_A_dentigerum.pdf", fig)
+save("plots/figure_S1.pdf", fig)
 
 
 ### Figure with all species for the Deutsch model
@@ -301,7 +304,7 @@ for i in 1:6
         color = ColorSchemes.Dark2_7[i], linewidth = 4, transparency = 0, label = replace(species[i], "_" => " "))
 end
 axislegend(ax, position = :lt)
-save("plots/deutsch_all_species.pdf", fig)
+save("plots/figure_04.pdf", fig)
 
 gqs_converged = map((f,c) -> generated_quantities(f, c), fs, chns_converged)
 return (fs, chns_converged, gqs_converged)
@@ -392,41 +395,20 @@ legend_aboveground = [MarkerElement(; marker = marker[i], color = colormap[2], s
 legend_belowground = [MarkerElement(; marker = marker[i], color = colormap[1], strokecolor = :transparent, markersize) for i in findall(.!is_aboveground)]
 species_label = replace.(species, "_" => " ")
 Legend(f[1,4], [legend_aboveground, legend_belowground], [species_label[is_aboveground], species_label[.!is_aboveground]], ["Aboveground", "Belowground"])
-f
+f # need to call here to generate ax1.finalllimit[]
 
 for (i, (ax, x, y_m, y_q)) in enumerate(zip(
     (ax1, ax2, ax3), (toptc_C, toptc_C, breadths.breadth), 
     (rmax_topt_cor_mean, breadth_topt_cor_mean, breadth_rmax_cor_mean), 
     (rmax_topt_cor_quant, breadth_topt_cor_quant, breadth_rmax_cor_quant)))
     if i > 1
-    limits!(ax, ax.finallimits[])
-    lines!(ax, x, y_m; color = :black)
-    lines!(ax, x, y_q[1,:]; color = :black, linestyle = :dot)
-    lines!(ax, x, y_q[2,:]; color = :black, linestyle = :dash)
-    lines!(ax, x, y_q[3,:]; color = :black, linestyle = :dash)
-    lines!(ax, x, y_q[4,:]; color = :black, linestyle = :dot)
+        limits!(ax, ax.finallimits[])
+        lines!(ax, x, y_m; color = :black)
+        lines!(ax, x, y_q[1,:]; color = :black, linestyle = :dot)
+        lines!(ax, x, y_q[2,:]; color = :black, linestyle = :dash)
+        lines!(ax, x, y_q[3,:]; color = :black, linestyle = :dash)
+        lines!(ax, x, y_q[4,:]; color = :black, linestyle = :dot)
     end
 end
-f
-save("plots/correlations_with_some_lines_2308.pdf", f)
 
-limits!(ax1, ax1.finallimits[])
-lines!(ax1, toptc_C, rmax_topt_cor_mean; color = :black)
-lines!(ax1, toptc_C, rmax_topt_cor_quant[1,:]; color = :black, linestyle = :dot)
-lines!(ax1, toptc_C, rmax_topt_cor_quant[2,:]; color = :black, linestyle = :dash)
-lines!(ax1, toptc_C, rmax_topt_cor_quant[3,:]; color = :black, linestyle = :dash)
-lines!(ax1, toptc_C, rmax_topt_cor_quant[4,:]; color = :black, linestyle = :dot)
-lines!(ax2, toptc_C, breadth_topt_cor_mean; color = :black)
-lines!(ax2, toptc_C, breadth_topt_cor_quant[1,:]; color = :black, linestyle = :dot)
-lines!(ax2, toptc_C, breadth_topt_cor_quant[2,:]; color = :black, linestyle = :dash)
-lines!(ax2, toptc_C, breadth_topt_cor_quant[3,:]; color = :black, linestyle = :dash)
-lines!(ax2, toptc_C, breadth_topt_cor_quant[4,:]; color = :black, linestyle = :dot)
-lines!(ax3, breadths.breadth, rmax_topt_cor_mean; color = :black)
-lines!(ax3, breadths.breadth, rmax_topt_cor_quant[1,:]; color = :black, linestyle = :dot)
-lines!(ax3, breadths.breadth, rmax_topt_cor_quant[2,:]; color = :black, linestyle = :dash)
-lines!(ax3, breadths.breadth, rmax_topt_cor_quant[3,:]; color = :black, linestyle = :dash)
-lines!(ax3, breadths.breadth, rmax_topt_cor_quant[4,:]; color = :black, linestyle = :dot)
-
-
-save("plots/correlations.pdf", f)
-save("plots/correlations.png", f)
+save(f, "plots/figure_05.pdf")
